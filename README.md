@@ -69,6 +69,10 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Setup Kartar RW 022
 
+Repository Github : https://github.com/Hafiz1802/Kartar_Project.git
+
+Clone Project Github : git clone https://github.com/Hafiz1802/Kartar_Project.git
+
 ```bash
 composer install
 cp .env.example .env && php artisan key:generate
