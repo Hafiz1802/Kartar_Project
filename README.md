@@ -86,7 +86,6 @@ php artisan migrate --seed
 php artisan kas:buat-tagihan          # buat tagihan bulan ini (juga jalan otomatis tgl 1 via scheduler)
 ```
 
-Cron server (untuk tagihan otomatis): `* * * * * php /path/ke/proyek/artisan schedule:run >> /dev/null 2>&1`
 
 Akun seeder (password: `password`, segera ganti): `ketua@kartar.test`, `bendahara@kartar.test`, `anggota@kartar.test`.
 
