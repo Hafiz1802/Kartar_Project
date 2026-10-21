@@ -69,6 +69,15 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Setup Kartar RW 022
 
+Repository Github : 
+```bash
+https://github.com/Hafiz1802/Kartar_Project.git
+```
+
+Clone Project Github : 
+```bash
+git clone https://github.com/Hafiz1802/Kartar_Project.git
+```
 ```bash
 composer install
 cp .env.example .env && php artisan key:generate
@@ -77,7 +86,6 @@ php artisan migrate --seed
 php artisan kas:buat-tagihan          # buat tagihan bulan ini (juga jalan otomatis tgl 1 via scheduler)
 ```
 
-Cron server (untuk tagihan otomatis): `* * * * * php /path/ke/proyek/artisan schedule:run >> /dev/null 2>&1`
 
 Akun seeder (password: `password`, segera ganti): `ketua@kartar.test`, `bendahara@kartar.test`, `anggota@kartar.test`.
 
