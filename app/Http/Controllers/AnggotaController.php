@@ -19,7 +19,6 @@ class AnggotaController extends Controller
         $this->pastikanKetua();
         $kataKunci = trim((string) $request->query('q', ''));
         $anggota = Pengguna::query()
-            ->where('role', 'anggota')
             ->when($kataKunci !== '', function ($query) use ($kataKunci) {
                 $query->where(function ($subQuery) use ($kataKunci) {
                     $subQuery->where('nama', 'like', "%{$kataKunci}%")
@@ -63,15 +62,12 @@ class AnggotaController extends Controller
     public function edit(Pengguna $pengguna)
     {
         $this->pastikanKetua();
-        abort_unless($pengguna->role === 'anggota', 404);
         return view('anggota.edit', compact('pengguna'));
     }
 
     public function update(Request $request, Pengguna $pengguna)
     {
         $this->pastikanKetua();
-        abort_unless($pengguna->role === 'anggota', 404);
-
         $data = $request->validate([
             'nama' => ['required', 'string', 'max:100'],
             'email' => ['required', 'email', 'max:100', Rule::unique('pengguna', 'email')->ignore($pengguna->id_pengguna, 'id_pengguna')],
@@ -98,7 +94,13 @@ class AnggotaController extends Controller
     public function destroy(Pengguna $pengguna)
     {
         $this->pastikanKetua();
-        abort_unless($pengguna->role === 'anggota', 404);
+        if ($pengguna->id_pengguna === auth()->id()) {
+            return redirect()->route('ketua.anggota.index')->with('error', 'Anda tidak dapat menghapus akun sendiri.');
+        }
+
+        if ($pengguna->role === 'ketua') {
+            return redirect()->route('ketua.anggota.index')->with('error', 'Akun Ketua tidak dapat dihapus.');
+        }
 
         if ($pengguna->tagihan()->exists()) {
             return redirect()->route('ketua.anggota.index')->with('error', 'Anggota tidak dapat dihapus karena sudah memiliki riwayat tagihan kas.');

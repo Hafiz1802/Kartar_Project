@@ -551,19 +551,24 @@
                     </a>
 
                     @if($user->bolehKelolaKeuangan())
-                        <a class="navlink"
-                           href="{{ route('dashboard') }}#keuangan">
+                        <a class="navlink {{ request()->routeIs('keuangan.index', 'keuangan.donatur.*') ? 'active' : '' }}"
+                           href="{{ route('keuangan.index') }}">
                             Keuangan
                         </a>
 
-                        <a class="navlink"
-                           href="{{ route('dashboard') }}#histori">
+                        <a class="navlink {{ request()->routeIs('keuangan.histori') ? 'active' : '' }}"
+                           href="{{ route('keuangan.histori') }}">
                             Histori &amp; Cetak
                         </a>
 
-                        <a class="navlink"
-                           href="{{ route('dashboard') }}#kas">
+                        <a class="navlink {{ request()->routeIs('kas.*') ? 'active' : '' }}"
+                           href="{{ route('kas.index') }}">
                             Kas Bulanan
+                        </a>
+
+                        <a class="navlink {{ request()->routeIs('pengajuan.*') ? 'active' : '' }}"
+                           href="{{ route('pengajuan.index') }}">
+                            Pengajuan Anggaran
                         </a>
                     @elseif($user->isAnggota())
                         <a class="navlink"
